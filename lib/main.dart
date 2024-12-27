@@ -79,14 +79,18 @@ class SplashScreenView extends StatefulWidget {
 }
 
 class _SplashScreenViewState extends State<SplashScreenView> {
+var provider;
 
   @override
   void initState() {
+    provider = Provider.of<HiveServiceProvider>(context, listen: false);
+
     super.initState();
-Timer(const Duration(milliseconds: 5000),_handleAppLaunch);
+Timer(const Duration(milliseconds: 3000),_handleAppLaunch);
 
   }
   Future<void> _handleAppLaunch() async {
+    await provider.getCurrentLocation();
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const HiveHomeScreen()));

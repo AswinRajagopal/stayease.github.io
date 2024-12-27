@@ -13,5 +13,11 @@ class CatModel {
   @HiveField(2)
   final bool isMale;
 
-  const CatModel(this.name, this.age, this.isMale);
+  @HiveField(3)
+  final String city;
+
+  @HiveField(4)
+  final String state;
+
+  const CatModel(this.name, this.age, this.isMale, this.city, this.state);
 }

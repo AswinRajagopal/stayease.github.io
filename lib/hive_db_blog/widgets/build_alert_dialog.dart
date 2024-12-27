@@ -8,7 +8,9 @@ import 'package:stayease/hive_db_blog/hive_service_provider.dart';
 import 'package:stayease/notifications_channel.dart';
 
 class AddCatAlert extends StatefulWidget {
-  const AddCatAlert({super.key});
+  final String? state;
+  final String? city;
+  const AddCatAlert({super.key, this.state, this.city});
 
   @override
   State<AddCatAlert> createState() => _AddCatAlertState();
@@ -26,6 +28,9 @@ class _AddCatAlertState extends State<AddCatAlert> {
         _nameEditingController.text.trim(),
         _ageEditingController.text.trim(),
         _isMale,
+        widget.city!=null?widget.city.toString():'',
+        widget.state!=null?widget.state.toString():''
+
       );
       var provider = Provider.of<HiveServiceProvider>(context, listen: false);
       provider.addCat(catModel);
