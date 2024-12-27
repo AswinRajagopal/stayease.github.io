@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:stayease/hive_db_blog/hive_service_provider.dart';
 import 'package:stayease/hive_db_blog/widgets/build_alert_dialog.dart';
@@ -18,8 +19,8 @@ class HiveHomeScreen extends StatefulWidget {
 class _HiveHomeScreenState extends State<HiveHomeScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
-
   var provider;
+
   void showAddCatDialog() {
     showGeneralDialog(
         barrierColor: Colors.black.withOpacity(0.5),
@@ -28,7 +29,7 @@ class _HiveHomeScreenState extends State<HiveHomeScreen>
           final curvedValue = Curves.easeInOutBack.transform(a1.value) - 1.0;
           return Transform(
             transform: Matrix4.translationValues(0.0, curvedValue * 200, 0.0),
-            child: Opacity(opacity: a1.value, child: const AddCatAlert()),
+            child: Opacity(opacity: a1.value, child:  AddCatAlert(state: provider.stateName,city: provider.cityName,)),
           );
         },
         transitionDuration: const Duration(milliseconds: 500),
@@ -37,6 +38,7 @@ class _HiveHomeScreenState extends State<HiveHomeScreen>
           return Container();
         });
   }
+
 
   @override
   void initState() {
@@ -47,7 +49,7 @@ class _HiveHomeScreenState extends State<HiveHomeScreen>
       duration: const Duration(milliseconds: 500),
     );
     AwesomeNotifications().isNotificationAllowed().then(
-          (isAllowed) {
+      (isAllowed) {
         if (!isAllowed) {
           showDialog(
             context: context,
@@ -84,7 +86,6 @@ class _HiveHomeScreenState extends State<HiveHomeScreen>
       },
     );
     super.initState();
-
   }
 
   @override
@@ -213,18 +214,50 @@ class _HiveHomeScreenState extends State<HiveHomeScreen>
           child: Consumer<HiveServiceProvider>(
               builder: (context, HiveServiceProvider, widget) {
             if (HiveServiceProvider.catModelList.isEmpty) {
-              return const Center(
-                child: Text("No Tenants found"),
+              return  Center(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 5.0,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                          elevation: 4.0,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(5.0),
+                            child: GoogleMap(
+                              initialCameraPosition: CameraPosition(
+                                target: provider.currentPosition,
+                                zoom: 14.0,
+                              ),
+                              onMapCreated: (GoogleMapController controller) {
+                                provider.mapController = controller;
+                              },
+                              markers: provider.markers,
+                              myLocationEnabled: true,
+                              myLocationButtonEnabled: true,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 50,),
+                    const Text("No Tenants found"),
+                  ],
+                ),
               );
             }
             return Column(children: [
               provider.isToggled
                   ? TextField(
-                style: const TextStyle(
-                  color: Colors.black, // Set the text color to black
-                  fontSize: 16, // Optional: Set font size
-                ),
-                onTapOutside: (event) => FocusScope.of(context).unfocus(),
+                      style: const TextStyle(
+                        color: Colors.black, // Set the text color to black
+                        fontSize: 16, // Optional: Set font size
+                      ),
+                      onTapOutside: (event) => FocusScope.of(context).unfocus(),
                       controller: provider.searchController,
                       decoration: const InputDecoration(
                         filled: true,
@@ -237,6 +270,45 @@ class _HiveHomeScreenState extends State<HiveHomeScreen>
                       },
                     )
                   : const SizedBox(),
+              const Padding(
+                padding: EdgeInsets.only(left: 15.0,top: 8.0),
+                child: Row(
+                  children: [
+                    Text('Current Location',style: TextStyle(fontWeight: FontWeight.w700,fontSize:18),),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 5.0,
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    elevation: 4.0,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(5.0),
+                      child: GoogleMap(
+                        initialCameraPosition: CameraPosition(
+                          target: provider.currentPosition,
+                          zoom: 14.0,
+                        ),
+                        onMapCreated: (GoogleMapController controller) {
+                          provider.mapController = controller;
+                        },
+                        markers: provider.markers,
+                        myLocationEnabled: true,
+                        myLocationButtonEnabled: true,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(left: 15.0,right: 15.0),
+                child: Divider(),
+              ),
               Expanded(
                 child: HiveServiceProvider.filteredItems.isNotEmpty
                     ? ListView.builder(
@@ -284,12 +356,24 @@ class _HiveHomeScreenState extends State<HiveHomeScreen>
                                       fontSize: 18,
                                     ),
                                   ),
-                                  subtitle: Text(
-                                    "Age ${HiveServiceProvider.filteredItems[index].age}\nGender:  ${HiveServiceProvider.filteredItems[index].isMale ? 'Male' : 'Female'}",
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w300,
-                                      fontSize: 14,
-                                    ),
+                                  subtitle: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Age: ${HiveServiceProvider.filteredItems[index].age}\nGender:  ${HiveServiceProvider.filteredItems[index].isMale ? 'Male' : 'Female'}",
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                      Text(
+                                        "City: ${HiveServiceProvider.filteredItems[index].city}\nState:  ${HiveServiceProvider.filteredItems[index].state}",
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                   trailing: IconButton(
                                     onPressed: () {
@@ -311,9 +395,9 @@ class _HiveHomeScreenState extends State<HiveHomeScreen>
                           );
                         },
                       )
-                    :  Center(
+                    : Center(
                         child: GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             provider.getCats();
                           },
                           child: const Row(
