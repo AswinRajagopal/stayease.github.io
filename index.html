@@ -22,7 +22,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
         .container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 30px auto;
             padding: 20px;
             background: rgba(255, 255, 255, 0.9);
@@ -44,23 +44,40 @@
             border: 3px solid #00579c;
             border-radius: 10px;
         }
-        ul {
-            list-style: none;
-            padding: 0;
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
         }
-        ul li {
+        .card {
             background: #e3f2fd;
-            margin: 10px 0;
-            padding: 15px;
             border: 2px solid #00579c;
-            border-radius: 5px;
-            color: #444;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 20px;
+            width: 150px;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: scale(1.1);
+        }
+        .card img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 10px;
+        }
+        .card p {
+            margin: 0;
             font-size: 1.1em;
+            color: #444;
         }
         footer {
             text-align: center;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.7);
+            background: #00579c;
             color: #ffffff;
             margin-top: 20px;
             box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.2);
@@ -87,11 +104,32 @@
         </video>
 
         <h2>Skills and Certifications</h2>
-        <ul>
-            <li>Flutter Development</li>
-            <li>DevOps Practices</li>
-            <li>Docker Certified Associate</li>
-        </ul>
+        <div class="cards">
+            <div class="card">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/flutter-2038877-1720090.png" alt="Flutter Icon">
+                <p>Flutter Development</p>
+            </div>
+            <div class="card">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/firebase-1-282796.png" alt="Firebase Icon">
+                <p>Firebase</p>
+            </div>
+            <div class="card">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/dart-2752137-2284971.png" alt="Dart Icon">
+                <p>Dart Programming</p>
+            </div>
+            <div class="card">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/docker-3628732-3030185.png" alt="Docker Icon">
+                <p>Docker</p>
+            </div>
+            <div class="card">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/devops-2752032-2284939.png" alt="DevOps Icon">
+                <p>DevOps</p>
+            </div>
+            <div class="card">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/kubernetes-3628709-3030162.png" alt="Kubernetes Icon">
+                <p>Kubernetes</p>
+            </div>
+        </div>
 
         <h2>Contact Me</h2>
         <p>If you would like to get in touch, feel free to reach out!</p>
