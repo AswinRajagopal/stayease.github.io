@@ -3,139 +3,494 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - StayEase</title>
+    <title>Aswin Rajagopal - Flutter Developer & DevOps Engineer</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            line-height: 1.6;
-            background: url('https://flutter.dev/assets/homepage/newsletter-news-1-4c2bc462c9ab1c2ec20827e17426f192d01714f3f21d3bca3d1e04b3b53b3066.png') no-repeat center center fixed;
-            background-size: cover;
-            color: #333;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: #2d3748;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
         header {
-            background: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
-        .container {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2 {
-            color: #00579c;
-            text-align: center;
-        }
-        p {
-            font-size: 1.2em;
-            color: #555;
-            text-align: justify;
-        }
-        video {
-            display: block;
-            margin: 20px auto;
-            border: 3px solid #00579c;
-            border-radius: 10px;
-        }
-        .cards {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            margin: 20px 0;
-        }
-        .card {
-            background: #e3f2fd;
-            border: 2px solid #00579c;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            padding: 20px;
-            width: 150px;
-            transition: transform 0.2s;
-        }
-        .card:hover {
-            transform: scale(1.1);
-        }
-        .card img {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 10px;
-        }
-        .card p {
-            margin: 0;
-            font-size: 1.1em;
-            color: #444;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #00579c;
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
             color: white;
-            margin-top: 20px;
-            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.2);
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        footer p {
-            margin: 0;
-            font-size: 1.2em;
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" opacity="0.15"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
         }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .name {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #81e6d9, #ffd89b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .title {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .content-section {
+            padding: 60px 40px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-bottom: 30px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #ffd89b, #19d4ee);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+            color: #1a202c;
+        }
+
+        .video-container {
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .video-wrapper {
+            display: inline-block;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .video-wrapper:hover {
+            transform: translateY(-10px);
+        }
+
+        video {
+            border: none;
+            display: block;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .skill-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+
+        .skill-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-icon img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .skill-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 15px;
+        }
+
+        .skill-description {
+            color: #4a5568;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .ai-tools-section {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px 0;
+            text-align: center;
+        }
+
+        .ai-tools-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 20px;
+        }
+
+        .ai-tools-description {
+            font-size: 1.1rem;
+            color: #4a5568;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cursor-badge {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin: 20px 10px;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .cursor-badge:hover {
+            transform: scale(1.05);
+        }
+
+        .contact-section {
+            background: #1a202c;
+            color: white;
+            text-align: center;
+            padding: 60px 40px;
+            margin-top: 60px;
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .contact-text {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .contact-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        footer {
+            background: #0d1117;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                margin: 20px;
+                border-radius: 15px;
+            }
+
+            .name {
+                font-size: 2.5rem;
+            }
+
+            .content-section {
+                padding: 40px 20px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .skill-card {
+                padding: 30px 20px;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .skill-card:nth-child(1) { animation-delay: 0.1s; }
+        .skill-card:nth-child(2) { animation-delay: 0.2s; }
+        .skill-card:nth-child(3) { animation-delay: 0.3s; }
+        .skill-card:nth-child(4) { animation-delay: 0.4s; }
+        .skill-card:nth-child(5) { animation-delay: 0.5s; }
+        .skill-card:nth-child(6) { animation-delay: 0.6s; }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Portfolio</h1>
-    </header>
-    <div class="container">
-        <h2>About Me</h2>
-        <p>Hello! I am a Flutter developer with 2 years and 6 months of experience. I am passionate about creating beautiful and functional mobile applications. In addition to my development expertise, I am a certified DevOps Associate and hold a Docker Certification.</p>
-        
-        <h2>Hobby Project: StayEase</h2>
-        <p>Below is a video presentation of my StayEase project. This project highlights my creativity and showcases my ability to combine my skills in development and design.</p>
-        <video width="600" controls>
-            <source src="assets/videos/ppt.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+    <div class="main-container">
+        <header>
+            <div class="header-content">
+                <h1 class="name">Aswin Rajagopal</h1>
+                <p class="title">Flutter Developer • DevOps Engineer • AI Enthusiast</p>
+            </div>
+        </header>
 
-        <h2>Skills and Certifications</h2>
-        <div class="cards">
-            <div class="card">
-                <img src="https://cdn.iconscout.com/icon/free/png-256/flutter-2038877-1720090.png" alt="Flutter Icon">
-                <p>Flutter Development</p>
+        <section class="content-section">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p class="about-text">
+                    I am a passionate <span class="highlight">Flutter developer</span> with 2.5 years of hands-on experience in creating beautiful, high-performance mobile applications. My expertise extends beyond development into the realm of <span class="highlight">DevOps and containerization</span>, holding certifications as a DevOps Associate and Docker specialist.
+                </p>
+                <p class="about-text">
+                    I believe in continuous learning and staying at the forefront of technology. My approach combines technical excellence with creative problem-solving to deliver exceptional user experiences.
+                </p>
             </div>
-            <div class="card">
-                <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/dart-programming-language-icon.png" alt="Dart Icon">
-                <p>Dart Programming</p>
-            </div>
-            <div class="card">
-                <img src="https://cdn.iconscout.com/icon/free/png-256/firebase-1-282796.png" alt="Firebase Icon">
-                <p>Firebase</p>
-            </div>
-            <div class="card">
-                <img src="https://clipground.com/images/devops-png-9.png" alt="DevOps Icon">
-                <p>DevOps</p>
-            </div>
-            <div class="card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Docker_%28container_engine%29_logo_%28cropped%29.png" alt="Docker Icon">
-                <p>Docker</p>
-            </div>
-            <div class="card">
-                <img src="https://static-00.iconduck.com/assets.00/kubernetes-icon-2048x1995-r1q3f8n7.png" alt="Kubernetes Icon">
-                <p>Kubernetes</p>
-            </div>
-        </div>
+        </section>
 
-        <h2>Contact Me</h2>
-        <p>If you would like to get in touch, feel free to reach out!</p>
+        <section class="content-section">
+            <h2 class="section-title">Featured Project: StayEase</h2>
+            <div class="about-content">
+                <p class="about-text">
+                    StayEase represents the culmination of my development skills and creative vision. This project showcases my ability to blend elegant design with robust functionality, creating a seamless user experience.
+                </p>
+            </div>
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <video width="600" controls>
+                        <source src="assets/videos/ppt.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Skills & Technologies</h2>
+            <div class="skills-grid">
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <img src="https://cdn.iconscout.com/icon/free/png-256/flutter-2038877-1720090.png" alt="Flutter">
+                    </div>
+                    <h3 class="skill-title">Flutter Development</h3>
+                    <p class="skill-description">Cross-platform mobile app development with rich UI/UX design and optimal performance</p>
+                </div>
+
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/dart-programming-language-icon.png" alt="Dart">
+                    </div>
+                    <h3 class="skill-title">Dart Programming</h3>
+                    <p class="skill-description">Advanced Dart programming with clean architecture and efficient code patterns</p>
+                </div>
+
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <img src="https://cdn.iconscout.com/icon/free/png-256/firebase-1-282796.png" alt="Firebase">
+                    </div>
+                    <h3 class="skill-title">Firebase Integration</h3>
+                    <p class="skill-description">Backend services, real-time databases, authentication, and cloud functions</p>
+                </div>
+
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <img src="https://clipground.com/images/devops-png-9.png" alt="DevOps">
+                    </div>
+                    <h3 class="skill-title">DevOps Engineering</h3>
+                    <p class="skill-description">CI/CD pipelines, automation, and infrastructure management with certified expertise</p>
+                </div>
+
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Docker_%28container_engine%29_logo_%28cropped%29.png" alt="Docker">
+                    </div>
+                    <h3 class="skill-title">Docker Containers</h3>
+                    <p class="skill-description">Application containerization and deployment with Docker certification</p>
+                </div>
+
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <img src="https://static-00.iconduck.com/assets.00/kubernetes-icon-2048x1995-r1q3f8n7.png" alt="Kubernetes">
+                    </div>
+                    <h3 class="skill-title">Kubernetes</h3>
+                    <p class="skill-description">Container orchestration and scalable application deployment</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="ai-tools-section">
+                <h3 class="ai-tools-title">AI-Powered Development</h3>
+                <p class="ai-tools-description">
+                    I'm currently leveraging <strong>Cursor AI</strong> across all my projects, exploring the cutting-edge intersection of artificial intelligence and software development. This approach has revolutionized my coding workflow, enabling more efficient problem-solving and accelerated development cycles.
+                </p>
+                <p class="ai-tools-description">
+                    Through "vibe coding" with AI tools, I'm discovering innovative patterns and methodologies that enhance both code quality and development speed. This represents the future of software engineering, where human creativity meets AI intelligence.
+                </p>
+                <div class="cursor-badge">
+                    🤖 Cursor AI Expert
+                </div>
+                <div class="cursor-badge">
+                    ⚡ AI-Assisted Development
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <h2 class="contact-title">Let's Connect</h2>
+            <p class="contact-text">
+                Ready to bring your next project to life? I'd love to discuss how we can work together.
+            </p>
+            <a href="#" class="contact-button">Get In Touch</a>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Aswin Rajagopal. All Rights Reserved. Built with passion and precision.</p>
+        </footer>
     </div>
-    <footer>
-        <p>&copy; 2024 Aswin Rajagopal. All Rights Reserved.</p>
-    </footer>
+
+    <script>
+        // Add smooth scrolling and animation triggers
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add hover effects to skill cards
+        document.querySelectorAll('.skill-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
 </body>
 </html>
